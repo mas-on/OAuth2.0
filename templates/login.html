@@ -1,0 +1,53 @@
+<html>
+<head>
+    <meta name="google-signin-scope" content="email">
+    <meta name="google-signin-client_id" content="217113941279-41qhkeru6u6h1480e4nv0t6718la25rn.apps.googleusercontent.com">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=start" async defer></script>    
+</head>
+<body>
+    <div id="signinButton"    class="g-signin2"                 
+                data-onsuccess="onSignIn"
+                data-onfailure="onSignInFailure"                    
+                data-redirecturi="postmessage"                
+                data-approvalprompt="force"         
+                >
+    </div>
+    <div id="result"></div>
+    <script>
+            function onSignIn(authResult) {
+                // Hide the sign-in button now that the user is authorized
+                $('#signinButton').attr('style', 'display: none');
+				
+                // The ID token you need to pass to your backend:
+				var response = authResult.getAuthResponse();
+                var tokens = {};
+				tokens['id_token'] = response.id_token;
+				tokens['access_token'] = response.access_token;
+				console.log(response);				
+              
+                $.ajax({
+                    type: 'POST',
+                    url: '/gconnect?state={{STATE}}',
+                    processData: false,
+                    data: JSON.stringify(tokens),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function(result) {
+                        // Handle or verify the server response if necessary.
+                        if (result) {
+                            $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+                            setTimeout(function() {
+                                window.location.href = "/restaurant";
+                            }, 4000);
+                        }
+                    }
+                });
+            }
+
+            function onSignInFailure(error) {
+                console.log('There was an error: ' + error);
+            }
+    </script>
+</body>
+</html>

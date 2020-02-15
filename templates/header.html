@@ -4,8 +4,11 @@
 			<span class="glyphicon glyphicon-home" aria-hidden="true"></span>Show All Restaurants
 		</a>
 	</div>
-	<div class="col-md-6 text-right">
-					<p>Login Link will go Here </p>
-		
+	<div class="col-md-6 text-right">					
+	{% if 'username' not in session %}
+		<a href="{{ url_for('showLogin') }}">Click Here to Log in</a>
+	{% else %}
+		<a href="{{ url_for('gdisconnect') }}">Click Here to Log out</a>
+	{% endif %}
 	</div>
 </div>
