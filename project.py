@@ -13,7 +13,6 @@ import random, string
 #from oauth2client.client import flow_from_clientsecrets
 #from oauth2client.file import Storage
 #from oauth2client.tools import run_flow
-#from oauth2client.client import credentials_from_clientsecrets_and_code
 
 
 import google.oauth2.credentials
