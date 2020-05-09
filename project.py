@@ -331,7 +331,10 @@ if __name__ == '__main__':
   app.secret_key = 'super_secret_key'
   app.debug = True
   
-  import os 
-  os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' #for testing without ssl
-  
-  app.run(host = '0.0.0.0', port = 5000)
+  #import os 
+  #os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' #for testing without ssl
+
+  app.run(host = '0.0.0.0', port = 5000, ssl_context=('cert.pem', 'key.pem'))
+
+# how to generate self signed certificate:
+# openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365
