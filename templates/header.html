@@ -8,7 +8,7 @@
 	{% if 'username' not in session %}
 		<a href="{{ url_for('showLogin') }}">Click Here to Log in</a>
 	{% else %}
-		<a href="{{ url_for('gdisconnect') }}">Click Here to Log out</a>
+		<a href="{{ url_for('disconnect') }}">Click Here to Log out</a>
 	{% endif %}
 	</div>
 </div>
